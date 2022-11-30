@@ -1,4 +1,4 @@
-import { Task } from './Task';
+import { Task } from './db/Task';
 
 export const TASKS: Task[] = [
   {
