@@ -12,18 +12,18 @@ export class TaskService {
   constructor() {}
 
   getTasks(): Observable<Task[]> {
-    return from(liveQuery(() => db.tasks.toArray())); // from converts to rxjs observable
+    return from(liveQuery(() => db.tasks.toArray())); // from converts Dexie Observable to RxJs observable
   }
 
-  deleteTask(task: Task): Observable<Task> {
-    return null;
+  deleteTask(task: Task): Observable<void> {
+    return from(db.tasks.delete(task.id));
   }
 
-  updateTaskReminder(task: Task): Observable<Task> {
-    return null;
+  updateTaskReminder(task: Task): Observable<number> {
+    return from(db.tasks.update(task.id, {reminder: task.reminder}));
   }
 
-  addTask(task: Task): Observable<Task> {
-    return null;
+  addTask(task: Task): Observable<number> {
+    return from(db.tasks.put(task));
   }
 }
